@@ -1,0 +1,95 @@
+body
+{
+    font-family: sans-serif;
+    background-color: #e4e0ec;
+}
+
+main
+{
+    min-height: calc(100vh - 56px - 56px);
+}
+
+#fullscreen-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://img.freepik.com/free-vector/battle-arena-with-runes-night-magic-forest_107791-18788.jpg?w=1380&t=st=1706345088~exp=1706345688~hmac=e2a48a3e8a9a665988469e06195f123deabe56df74c76a1b5c57602f3f47f371');
+    background-size: cover; 
+    background-position: center;
+    z-index: -1; /* Ensure the image is behind other content */
+    /* background-size: contain; */
+  }
+
+  .navbar-brand img {
+    height: 40px; /* Adjust the height as needed */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add margin for spacing */
+    border-radius: 100%;
+  }
+.registration-box {
+    background:linear-gradient(to right, #c9cff3ae, #cddaf39a);
+    /* Set background color */
+    border: 1px solid #ddd;
+    /* Add a border */
+    padding: 20px;
+    /* Add some padding */
+    border-radius: 8px;
+    /* Optional: Add rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Optional: Add a box shadow */
+}
+
+.registration-box h3 {
+    color: #333;
+    /* Optional: Style heading text color */
+}
+
+@keyframes animate {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(10px, 20px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+#img-move{
+    animation: animate 4s infinite ease-in-out;
+}
+
+.card-custom {
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust the last value (0.8) for transparency */
+    border: none; /* Remove the border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center the text */
+    padding: 20px;
+}
+
+.card-custom h1 {
+    color: #333;
+    font-size: 2.5em; /* Adjust the font size as needed */
+    font-weight: bold; /* Increase the font weight */
+    margin-bottom: 20px; /* Add some bottom margin */
+}
+
+.card-custom p {
+    color: #555;
+    font-size: 1.2em; /* Adjust the font size as needed */
+    margin-bottom: 20px; /* Add some bottom margin */
+}
+
+.card-custom .btn-primary {
+    background-color: #007bff; /* Use your preferred color */
+    border-color: #007bff;
+    font-size: 1.2em; /* Adjust the font size as needed */
+}
+
+.card-custom:hover {
+    background-color: rgba(255, 255, 255, 1); /* Adjust the last value (1) for hover transparency */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}

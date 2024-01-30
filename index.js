@@ -1,0 +1,24 @@
+//Moe Myat Thwe 2340362 DIT FT 1B 05
+// Likely index.js is gven. If not given copy everything
+// in this copy. Just remember to set the PORT number to
+// the correct number given in question paper.
+
+//////////////////////////////////////////////////////
+// INCLUDES
+//////////////////////////////////////////////////////
+const app = require('./src/app'); // note app.js is your own
+// so you need to get the path correct
+// you can put app.js or just app
+// DO NOT put express.js or mysql2.js
+
+//////////////////////////////////////////////////////
+// SETUP ENVIRONMENT
+//////////////////////////////////////////////////////
+const PORT = 3000;
+
+//////////////////////////////////////////////////////
+// START SERVER
+//////////////////////////////////////////////////////
+app.listen(PORT,()=> {
+    console.log(`App listening to port ${PORT}`);
+});
