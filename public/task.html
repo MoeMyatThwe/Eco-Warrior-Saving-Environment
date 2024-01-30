@@ -89,6 +89,31 @@
           </div>
         </div>
       </div>
+
+      <!-- for creating task -->
+      <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form id="createTaskForm">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="points" class="form-label">Points</label>
+                        <input type="number" class="form-control" id="points" name="points" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Task</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+      <!-- //////////////////// -->
       <div class="container">
         <!-- <div id="taskList" class="row"></div> -->
         <div id="taskList" class="row justify-content-center">
@@ -121,5 +146,6 @@
     <script src="js/getCurrentURL.js" type="text/javascript"></script>
     <script src="js/userNavbarToggle.js" type="text/javascript"></script>
     <script src="js/showAllTasks.js" type="text/javascript"></script>
+    <script src="js/createTask.js" type="text/javascript"></script>
   </body>
 </html>
