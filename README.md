@@ -244,7 +244,17 @@ router.post('/:user_id',
     magicalitemshopController.deductPoints,
     magicalitemshopController.addToUserInventory);
 
-## CA2 used endpoints
+## CA2 explanation
+
+CA2 have 
+Home
+Users
+Tasks
+Item
+Message
+
+
+Before Register and log in,user cannot see certain content...for eg Users,existing tasks,existing items,and won't be able to successfully interact with 
 
 
 
