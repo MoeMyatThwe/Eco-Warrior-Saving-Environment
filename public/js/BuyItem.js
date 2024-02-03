@@ -38,7 +38,7 @@
         
 //     };
   
-//     fetchMethod(currentUrl + `/api/task_progress/${task_id}`, callback, "GET", null, localStorage.getItem('token'));
+//     fetchMethod(currentUrl + `/api/magical_item_shop/${item_id}`, callback, "GET", null, localStorage.getItem('token'));
         
   
 //   });

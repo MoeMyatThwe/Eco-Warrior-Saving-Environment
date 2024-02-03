@@ -1,5 +1,5 @@
 //Moe Myat Thwe 2340362 DIT FT 1B 05
-
+let usersData = [];
 // Add event listener to the team selection form
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -10,38 +10,61 @@ teamSelectionForm.addEventListener("submit", function (event) {
 
   // Get the selected team
   const selectedTeam = document.getElementById("team").value;
-  if(localStorage.getItem("selectedTeam")){
-    teamSelectionForm.disabled = true;
-  }else{
-  // Store the selected team in local storage
-  localStorage.setItem("selectedTeam", selectedTeam);
-  }
+  teamSelectionForm.disabled = true;
 
-  // Call the addUserToTable function to add the user to the respective team table
-  addUserToTable(selectedTeam);
-});
+    // Get existing usersData from local storage or initialize an empty array
+    usersData = JSON.parse(localStorage.getItem("usersData")) || [];
 
-// Create an array to store user data
-let usersData = [];
+    // Check if the user has already selected a team
+    const existingUser = usersData.find(user => user.userId === localStorage.getItem("userId"));
 
-// Function to add a user to the respective team table
-function addUserToTable(teamId) {
-  // Get the user ID from local storage
-  const userId = localStorage.getItem("userId");
+    if (!existingUser) {
+      // Add the user to the usersData array
+      usersData.push({
+        userId: localStorage.getItem("userId"),
+        teamId: selectedTeam
+      });
+
+      // Update the table with the new data
+      updateTable();
+
+      // Store the updated usersData in local storage
+      localStorage.setItem("usersData", JSON.stringify(usersData));
+    }
+  });
+
+//   if(localStorage.getItem("selectedTeam")){
+//     teamSelectionForm.disabled = true;
+//   }else{
+//   // Store the selected team in local storage
+//   localStorage.setItem("selectedTeam", selectedTeam);
+//   }
+
+//   // Call the addUserToTable function to add the user to the respective team table
+//   addUserToTable(selectedTeam);
+// });
+
+// // Create an array to store user data
+// let usersData = [];
+
+// // Function to add a user to the respective team table
+// function addUserToTable(teamId) {
+//   // Get the user ID from local storage
+//   const userId = localStorage.getItem("userId");
 
 
-  // Create a new user object
-  const user = {
-    userId: userId,
-    teamId: teamId
-  };
+//   // Create a new user object
+//   const user = {
+//     userId: userId,
+//     teamId: teamId
+//   };
 
-  // Add the user object to the usersData array
-  usersData.push(user);
+//   // Add the user object to the usersData array
+//   usersData.push(user);
 
-  // Update the table with the new data
-  updateTable();
-}
+//   // Update the table with the new data
+//   updateTable();
+// }
 
 // Function to update the table with the user data
 function updateTable() {
@@ -81,9 +104,13 @@ function updateTable() {
 
 // Check if there is a selected team in local storage
 const selectedTeam = localStorage.getItem("selectedTeam");
+// if (selectedTeam) {
+//   // Call the addUserToTable function to add the user to the respective team table
+//   addUserToTable(selectedTeam);
+// }
 if (selectedTeam) {
-  // Call the addUserToTable function to add the user to the respective team table
-  addUserToTable(selectedTeam);
+  teamSelectionForm.disabled = true;
+  updateTable();
 }
 });
 //////////////////////////////////////////////////////////////////////////////////

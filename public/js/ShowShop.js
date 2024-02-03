@@ -18,7 +18,7 @@
                         Description: ${shop.description}<br>
                         Price: ${shop.price}
                     </p>
-                    <button class="btn btn-primary buy-button" data-item-id="${shop.item_id}">Buy</button>
+                  
                 </div>
             </div>
             `;

@@ -249,6 +249,7 @@ router.post('/:user_id',
 CA2 have 
 Home
 Users
+Team
 Tasks
 Item
 Message
@@ -257,6 +258,8 @@ Message
 >Before Register and log in,user cannot see certain content...for eg Users,existing tasks,existing items,and won't be able to successfully interact with.
 
 >In User page,only loggined user will be able to see all users info.But only the authorized user will be able to click the view Details and update user info.
+
+>In Team page,user can choose only one team, the next logged in user can choose only after the before user has logged out,and one user can choose only once to only one team.
 
 >In task page,unauthorized user will be able to see the create task part but will not be able to create the task successfully.
 Authorized logged in user can createtask,delete task,update task,complete task(only if user fill the notes)
