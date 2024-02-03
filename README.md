@@ -254,7 +254,24 @@ Item
 Message
 
 
-Before Register and log in,user cannot see certain content...for eg Users,existing tasks,existing items,and won't be able to successfully interact with 
+>Before Register and log in,user cannot see certain content...for eg Users,existing tasks,existing items,and won't be able to successfully interact with.
+
+>In User page,only loggined user will be able to see all users info.But only the authorized user will be able to click the view Details and update user info.
+
+>In task page,unauthorized user will be able to see the create task part but will not be able to create the task successfully.
+Authorized logged in user can createtask,delete task,update task,complete task(only if user fill the notes)
+
+>In Item page,users can only view the magical items
+
+>In message page,user can create,edit,delete,view message
+
+>in profile,user can see his or her details
+
+
+
+
+
+
 
 
 
