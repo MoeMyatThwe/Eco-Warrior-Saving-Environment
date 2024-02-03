@@ -12,14 +12,46 @@ module.exports.insertSingle = (data, callback) =>
 }
 
 module.exports.gettingTaskprogressData = (data, callback)=> {
+    // const SQLSTATMENT = `
+    //     SELECT * FROM TaskProgress
+    //     WHERE user_id = ?;
+    // `;
+    // const VALUES = [data.user_id];
+
     const SQLSTATMENT = `
-        SELECT * FROM TaskProgress
-        WHERE user_id = ?;
-    `;
-    const VALUES = [data.user_id];
+    SELECT tp.progress_id, tp.user_id, tp.task_id, tp.completion_date, tp.notes, t.title, u.username, up.total_points
+    FROM TaskProgress tp
+    INNER JOIN Task t ON tp.task_id = t.task_id
+    INNER JOIN User u ON tp.user_id = u.user_id
+    INNER JOIN UserPoints up ON tp.user_id = up.user_id
+    WHERE tp.user_id = ?;
+  `;
+  const VALUES = [data.user_id];
     pool.query(SQLSTATMENT, VALUES, callback);
 }
 /////////////////
+
+//CA2 added
+
+module.exports.gettingTaskprogressDataByTaskId = (data, callback)=> {
+    const SQLSTATMENT = `
+        SELECT * FROM TaskProgress
+        WHERE task_id = ? AND user_id = ?;
+    `;
+    const VALUES = [data.task_id,data.user_id];
+
+//     const SQLSTATMENT = `
+//     SELECT tp.progress_id, tp.user_id, tp.task_id, tp.completion_date, tp.notes, t.title, u.username, up.total_points
+//     FROM TaskProgress tp
+//     INNER JOIN Task t ON tp.task_id = t.task_id
+//     INNER JOIN User u ON tp.user_id = u.user_id
+//     INNER JOIN UserPoints up ON tp.user_id = up.user_id
+//     WHERE tp.user_id = ?;
+//   `;
+//   const VALUES = [data.task_id,data.user_id];
+    pool.query(SQLSTATMENT, VALUES, callback);
+}
+///////////////////
 
 //Q12+ Q13
 module.exports.selectTaskprogressById = (data, callback) =>
@@ -124,3 +156,29 @@ module.exports.selectProgressByIdPoints= (data, callback) =>
     const VALUES = [data.progress_id];
     pool.query(SQLSTATMENT, VALUES, callback)
 }
+
+//CA2 added
+
+
+
+module.exports.gettingTaskprogressData = (data, callback) => {
+
+    const SQLSTATMENT = `
+    SELECT * FROM TaskProgress 
+    WHERE user_id = ?`;
+    const VALUES = [data.user_id];
+    pool.query(SQLSTATMENT, VALUES, callback)
+
+};
+
+// //CA2 added
+// module.exports.insertSingleProgress = (data, callback) =>
+// {
+//     const SQLSTATMENT = `
+//     INSERT INTO TaskProgress (user_id, task_id, completion_date, notes)
+//     VALUES (?, ?, ?, ?);`
+//     ;
+// const VALUES = [data.user_id, data.task_id, data.completion_date, data.notes];
+
+// pool.query(SQLSTATMENT, VALUES, callback);
+// }

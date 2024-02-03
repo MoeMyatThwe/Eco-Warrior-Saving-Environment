@@ -238,3 +238,84 @@ module.exports.deleteTaskprogressById = (req, res, next) => {
     taskprogressModel.deleteById(data, callback);
 }
 //////////////////////////////
+//CA2
+module.exports.getTaskprogressUserId = (req,res, next) => {
+
+    const data = {
+        user_id: req.params.user_id
+    }
+
+    const callback = (error, taskProgressData) => {
+        if (error) {
+          console.error('Error fetching task progress:', error);
+          res.status(500).json({ error: 'Failed to fetch task progress' });
+        } else {
+          res.json(taskProgressData);
+        }
+      };
+    
+      taskprogressModel.gettingTaskprogressData(data, callback);
+    };
+
+    ///////////////////////
+    //CA2 added
+    //CA2
+module.exports.getTaskprogressByTaskId = (req,res, next) => {
+
+    const data = {
+        task_id: req.params.task_id,
+        user_id: res.locals.userId
+    }
+
+    const callback = (error, taskProgressData) => {
+        if (error) {
+          console.error('Error fetching task progress:', error);
+          res.status(500).json({ error: 'Failed to fetch task progress' });
+        } else {
+          res.json(taskProgressData);
+        }
+      };
+    
+      taskprogressModel.gettingTaskprogressDataByTaskId(data, callback);
+    };
+
+
+    // //CA2 added
+    // module.exports.createNewTaskProgress = (req, res, next) => {
+    
+    //     const data = {
+    //         user_id: res.locals.userId,
+    //         task_id: req.body.task_id,
+    //         completion_date: req.body.completion_date,
+    //         notes: req.body.notes
+    //     }
+        
+        
+    //     const callback = (error, results, fields) => {
+    //         console.log(results);
+    //         if(error) {
+    //             console.error("Error createNewTaskProgress:", error);
+    //             res.status(500).json(error);
+    //         } else {
+    //             res.status(201).json({
+    //                 progress_id: results.insertId,
+    //                 user_id: req.body.user_id,
+    //                 task_id: req.body.task_id,
+    //                 completion_date: req.body.completion_date,
+    //                 notes: req.body.notes
+    //             });
+    //         }
+    //     }
+    //     taskprogressModel.insertSingleProgress(data, callback);
+    // }
+    
+    // module.exports.insertSingleProgress = (data, callback) =>
+    // {
+    //     const SQLSTATMENT = `
+    //     INSERT INTO TaskProgress (user_id, task_id, completion_date, notes)
+    //     VALUES (?, ?, ?, ?);`
+    //     ;
+    // const VALUES = [data.user_id, data.task_id, data.completion_date, data.notes];
+    
+    // pool.query(SQLSTATMENT, VALUES, callback);
+    // }

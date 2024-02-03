@@ -143,4 +143,32 @@ module.exports.deleteTaskById = (req, res, next) => {
     taskModel.deleteById(data, callback);
 }
 //////////////////////////////
+// //CA2 added
+// module.exports.getTaskId = (req, res, next) =>
+// {
+//     const data = {
+//         task_id: req.body.task_id
+//     }
 
+//     const callback = (error, results, fields) => {
+//         console.log("this is results from getTaskId", results);
+//         if (error) {
+//             console.error("Error checkTaskId:", error);
+//             res.status(500).json(error);
+//         } else {
+//             if(results.length == 0) 
+//             {
+//                 res.status(404).json({
+//                     message: "Task does not exist"
+//                 });
+//             }
+//             else {
+//             res.locals.points = results[0].points;
+            
+//             next();
+//             }
+//         }
+//     }
+
+//     taskModel.selectById(data, callback);
+// }

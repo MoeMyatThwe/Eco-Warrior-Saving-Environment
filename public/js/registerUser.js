@@ -1,3 +1,4 @@
+//Moe Myat Thwe 2340362 DIT FT 1B 05
 document.addEventListener("DOMContentLoaded", function () {
   const signupForm = document.getElementById("signupForm");
   const warningCard = document.getElementById("warningCard");
@@ -44,7 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
       };
 
       // Perform signup request
-      fetchMethod(currentUrl + "/api/register", callback, "POST", data);
+      fetchMethod(currentUrl + "/api/register", callback, "POST", data,localStorage.getItem('token'));
+
 
       // Reset the form fields
       signupForm.reset();

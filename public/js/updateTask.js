@@ -1,18 +1,12 @@
-
+//Moe Myat Thwe 2340362 DIT FT 1B 05
 document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
     const taskId = urlParams.get("task_id");
 
-    fetchMethod(currentUrl + `/api/tasks/${taskId}`, (responseStatus, responseData) => {
-        if (responseStatus === 200) {
-            createUpdateForm(responseData);
-        } else {
-            console.error("Error fetching task details:", responseStatus);
-        }
-    });
+    fetchMethod(currentUrl + `/api/tasks/${taskId}`,createUpdateForm, "GET", null, localStorage.getItem('token'));
 });
 
-function createUpdateForm(taskDetails) {
+function createUpdateForm(responseStatus,taskDetails) {
     const updateTaskContainer = document.getElementById("updateTaskContainer");
 
     // Create form elements dynamically
@@ -38,6 +32,7 @@ function createUpdateForm(taskDetails) {
     // Add event listener to the "Save Changes" button
     const saveChangesBtn = document.getElementById("saveChangesBtn");
     saveChangesBtn.addEventListener("click", saveUpdatedTask);
+
 }
 
 function saveUpdatedTask() {
@@ -56,16 +51,9 @@ function saveUpdatedTask() {
         points: updatedPoints,
     };
 
-    // Send updated task details to the server
-    fetchMethod(currentUrl + `/api/tasks/${taskId}`, (responseStatus, responseData) => {
-        if (responseStatus === 200) {
-            console.log("Task updated:", responseData);
-            // You can add additional logic or UI changes after updating the task if needed
-            // Redirect to the task list page or any other page as needed
-            window.location.href = "task.html";
-        } else {
-            console.error("Error updating task:", responseStatus);
-            // Handle errors, show error messages, etc.
-        }
-    }, "PUT", updatedTaskData);
+    window.location.href="task.html";
+
+
+
+    fetchMethod(currentUrl + `/api/tasks/${taskId}`,saveUpdatedTask, "PUT", updatedTaskData, localStorage.getItem('token'));
 }

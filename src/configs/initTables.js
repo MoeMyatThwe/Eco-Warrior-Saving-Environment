@@ -1,11 +1,31 @@
 //Moe Myat Thwe 2340362 DIT/FT/1B/05
 const pool = require("../services/db");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
+const callback = (error, results, fields) => {
+  if (error) {
+    console.error("Error creating tables:", error);
+  } else {
+    console.log("Tables created successfully");
+  }
+  process.exit();
+}
+
+bcrypt.hash('1234', saltRounds, (error, hash) => {
+  if (error) {
+    console.error("Error hashing password:", error);
+  } else {
+    console.log("Hashed password:", hash);
+
+
 const SQLSTATEMENT = `  
         DROP TABLE IF EXISTS UserInventory;
         DROP TABLE IF EXISTS UserPoints;
         DROP TABLE IF EXISTS TaskProgress;
         DROP TABLE IF EXISTS MagicalItemShop;      
         DROP TABLE IF EXISTS UserTeam;
+        DROP TABLE IF EXISTS Messages;
         DROP TABLE IF EXISTS User;
         DROP TABLE IF EXISTS Task;
         DROP TABLE IF EXISTS Team;  
@@ -77,6 +97,13 @@ const SQLSTATEMENT = `
             FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
             FOREIGN KEY (team_id) REFERENCES Team(team_id) ON DELETE CASCADE ON UPDATE CASCADE
           );
+
+          CREATE TABLE Messages (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            message TEXT NOT NULL,
+            user_id INT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+          );
          
           INSERT INTO Task VALUES 
           (1,'Plant a Tree','Plant a tree in your neighbourhood or a designated green area.',50),
@@ -98,13 +125,8 @@ const SQLSTATEMENT = `
            (1,'Team Phoenix'),
            (2,'Team Legends');
 
+         
           `;
-
-pool.query(SQLSTATEMENT, (error, results, fields) => {
-    if (error) {
-        console.error("Error creating tables:", error);
-    } else {
-        console.log("Tables created successfully:");
-    }
-    process.exit();
+    pool.query(SQLSTATEMENT, callback);
+  }
 });

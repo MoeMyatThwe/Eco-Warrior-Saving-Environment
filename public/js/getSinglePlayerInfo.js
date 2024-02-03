@@ -1,3 +1,4 @@
+//Moe Myat Thwe 2340362 DIT FT 1B 05
 document.addEventListener("DOMContentLoaded", function () {
   url = new URL(document.URL);
   const urlParams = url.searchParams;

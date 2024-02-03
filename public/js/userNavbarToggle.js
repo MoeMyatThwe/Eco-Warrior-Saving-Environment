@@ -1,3 +1,5 @@
+//Moe Myat Thwe 2340362 DIT FT 1B 05
+
 document.addEventListener("DOMContentLoaded", function () {
   const loginButton = document.getElementById("loginButton");
   const registerButton = document.getElementById("registerButton");

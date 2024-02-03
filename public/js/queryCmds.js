@@ -1,3 +1,4 @@
+//Moe Myat Thwe 2340362 DIT FT 1B 05
 //=====================================================================================
 // FETCH METHOD
 // This function uses the fetch API to make a request to the server.

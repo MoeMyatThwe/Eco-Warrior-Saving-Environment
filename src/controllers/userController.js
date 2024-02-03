@@ -142,7 +142,7 @@ module.exports.register = (req, res, next) =>
 {
     const {username, email, password} = req.body;
     if(!username || !email || !password) {
-        res.status(400).json({Error: `Come on lah! Cannot empty values leh..`});
+        res.status(400).json({Error: `Must fill in username, email and password..`});
         return;
     }
 
@@ -158,6 +158,7 @@ module.exports.register = (req, res, next) =>
             res.status(500).json(error);
         } else {
             res.locals.message = `User ${username} created successfully.`; // Test expects this specified output
+            res.locals.user_id=results.insertId;
             next();
         }
     }
@@ -168,7 +169,7 @@ module.exports.login = (req, res, next) =>
 {
     const {username, password} = req.body;
     if(!username || !password) {
-        res.status(400).json({Error: `Come on lah! Cannot empty values leh..`});
+        res.status(400).json({Error: `username or passw`});
         return;
     }
 
@@ -181,11 +182,12 @@ module.exports.login = (req, res, next) =>
             console.error("Error in login function:", error);
             res.status(500).json(error);
         } else if (results.length == 1) { 
-            res.locals.id = results[0].id;
+            res.locals.user_id = results[0].user_id;
+            res.locals.username = results[0].username;
             res.locals.hash = results[0].password;
             next();
         } else if (results.length > 1) { // too many records with the same username found
-            res.status(409).json({message: `Seriously? Cannot imagine how you can let the database table be corrupted to have duplicated users`});
+            res.status(409).json({message: ` the database table is corrupted due to duplicated users`});
         } else { // record for the specified username not in table
             res.status(404).json({message: `User not found`}); // Test expects this specified output
         }
@@ -237,7 +239,8 @@ module.exports.readUserById = (req, res, next) => {
 module.exports.checkAvailability = (req, res, next) => {
     const data = {
         username: req.body.username,
-        email: req.body.email
+        email: req.body.email,
+        user_id:req.body.user_id
     }
 
     if (req.body.username === undefined || req.body.email === undefined) {
@@ -256,6 +259,7 @@ module.exports.checkAvailability = (req, res, next) => {
                     message: "Username or email already exists"
                 });
             } else {
+                res.locals.user_id = data.user_id
                 next();
             }
         }
@@ -270,9 +274,11 @@ module.exports.checkAvailability = (req, res, next) => {
 module.exports.updateUserById = (req, res, next) => {
 
     const data = {
-        user_id: req.params.user_id,
+        user_id: req.body.user_id,
         username: req.body.username,
         email: req.body.email,
+        
+
     };
 
     const callback = (error, results, fields) => {
@@ -449,6 +455,7 @@ module.exports.addUserToTeam = (req, res, next) => {
         user_id: req.body.user_id,
         team_id: req.body.team_id,
     };
+    console.log(data)
     const callback = (error, results, fields) => {
         if (error) {
             res.status(500).json(error);
@@ -478,3 +485,59 @@ module.exports.getUserTeamInfo = (req, res, next) => {
 }
 
 ///////////////////////////////////
+//CA2 added
+module.exports.readCurrentUser = (req, res, next) =>
+{
+    const data = {
+        id: res.locals.userId
+    }
+    const callback = (error, results, fields) => {
+        
+        if (error) {
+            console.error("Error readUserById:", error);
+            res.status(500).json(error);
+        } else {
+            if(results.length == 0) 
+            {
+                res.status(404).json({
+                    message: "User not found"
+                });
+            }
+            else res.status(200).json(results[0]);
+        }
+    }
+    userModel.selectById(data, callback);
+}
+/////////////////////////////////////
+
+// //CA2 added
+// module.exports.updateUserPoints = (req, res, next) =>
+// {
+
+//     const data = {
+//         points: res.locals.points,
+//         user_id: res.locals.userId
+//     }
+
+//     const callback = (error, results, fields) => {
+//         if (error) {
+//             console.error("Error updateUserById:", error);
+//             res.status(500).json(error);
+//         } else {
+//             if(results.affectedRows == 0) 
+//             {
+//                 res.status(404).json({
+//                     message: "User not found"
+//                 });
+//             }
+//             else {
+                
+//                 next();
+
+//                 // res.status(200).json(results[0])
+//             };
+//         }
+//     }
+
+//     userModel.updatePoints(data, callback);
+// }

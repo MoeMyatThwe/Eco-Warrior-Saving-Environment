@@ -268,4 +268,28 @@ module.exports.selectUserByUsernameAndPassword = (data, callback) =>
     pool.query(SQLSTATMENT, VALUES, callback);
 }
 
+// //CA2 added
+// module.exports.selectById = (data, callback) =>
+// {
+//     const SQLSTATMENT = `
+//     SELECT * FROM User
+//     WHERE User.user_id = ?;
+//     `;
+// const VALUES = [data.id];
+
+// pool.query(SQLSTATMENT, VALUES, callback);
+// }
+
+// //CA2 added
+// module.exports.updatePoints = (data, callback) =>
+// {
+//     const SQLSTATMENT = `
+//     UPDATE User
+//     SET points = points + ?
+//     WHERE user_id = ?;
+//     `;
+// const VALUES = [data.points, data.user_id];
+
+// pool.query(SQLSTATMENT, VALUES, callback);
+// }
 
