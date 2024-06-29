@@ -13,7 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmPassword = document.getElementById("confirmPassword").value;
 
     // Perform signup logic
-    if (password === confirmPassword) {
+    if(password.length  < 8){
+      warningCard.classList.remove("d-none");
+      warningText.innerText = "Password must be at least 8 characters";
+    }
+    else if (password === confirmPassword) {
       // Passwords match, proceed with signup
       console.log("Signup successful");
       console.log("Username:", username);
@@ -35,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
           if (responseData.token) {
             // Store the token in local storage
             localStorage.setItem("token", responseData.token);
+            localStorage.setItem('userId',responseData.user_id)
             // Redirect or perform further actions for logged-in user
             window.location.href = "profile.html";
           }
